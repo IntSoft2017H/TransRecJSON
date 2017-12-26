@@ -1,4 +1,4 @@
-# JSON for TransRec
+# Convert JSON for TransRec
 
 A script `json2txt.py` converts a JSON file into a text file which can be used as an input for TransRec.
 

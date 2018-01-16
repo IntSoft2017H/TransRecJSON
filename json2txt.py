@@ -27,7 +27,7 @@ def line_count(filepath):
     
   return lines
 
-def print_json_gz(filepath, json_uName, json_iName, json_value, json_voteTime):
+def print_json_gz(filepath, json_uName, json_iName, json_value, json_voteTime, chunksize=10000):
   """
   Print data in a JSON dataset in the space-separeted text format used by TransRec
   
@@ -36,14 +36,18 @@ def print_json_gz(filepath, json_uName, json_iName, json_value, json_voteTime):
   @param json_iName item name string
   @param json_value rating value integer
   @param json_voteTime rated time integer (e.g. unix time)
+  @param chunksize size of chunk when loading a large JSON file
   @return void
   """
   whole_rows = line_count(filepath)
-  row_size = 10000
   df_reader = pd.read_json(filepath,
                            lines=True,
-                           chunksize=row_size,
-                           compression='infer')
+                           chunksize=chunksize,
+                           compression='infer',
+                           dtype={json_uName: 'string',
+                                  json_iName: 'string',
+                                  json_value: 'string',
+                                  json_voteTime: 'string'})
   row_nums = 0
   for chunk in df_reader:
     for _, row in chunk.iterrows():

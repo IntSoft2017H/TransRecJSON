@@ -40,13 +40,21 @@ You can use the result executable `train` as the following:
 
 Data: <http://jmcauley.ucsd.edu/data/amazon/>
 
-We can use `json2txt.py` to convert Amazon's 5-core json datasets to txt.
+We can use `json2txt.py` to convert Amazon's 5-core JSON datasets to txt.
 
 ## Google Local
 
 Data: <http://jmcauley.ucsd.edu/data/googlelocal/googlelocal.tar.gz>
 
-We can use `json2txt.py` to convert json to txt.
+Actually, this "JSON" file is not a JSON. So I wrote a converter for dealing with this problem. You can convert `reviews.clean.json` by the following command.
+
+```sh
+go run ./toJSON.go < reviews.clean.json > reviews.clean.real.json
+```
+
+If you think this conversion is slow, you can compile the Go source by using `go build ./toJSON.go` and run `./toJSON`.
+
+We can use `json2txt.py` to convert JSON to txt.
 
 ## Epinions
 

@@ -3,4 +3,5 @@
 *.txt
 *.gz
 /amazon
-/googlelocal
+/googlelocal/*
+!/googlelocal/toJSON.go
